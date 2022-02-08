@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import {
   Card,
   CardImg,
@@ -189,3 +189,4 @@ function CampsiteInfo(props) {
 }
 
 export default CampsiteInfo;
+
