@@ -72,17 +72,15 @@ export const addComments = comments => ({
 export const addComment = comment => ({
     type: ActionTypes.ADD_COMMENT,
     payload: comment
-})
+});
 
-
-
-export const postComment = (campsiteId, rating, author, text) => dispatch =>{ 
+export const postComment = (campsiteId, rating, author, text) => dispatch => { 
     const newComment = {
         campsiteId: campsiteId,
         rating: rating,
         author: author,
         text: text
-    }
+    };
     newComment.date = new Date().toISOString();
 
     return fetch(baseUrl + 'comments', {
@@ -99,7 +97,7 @@ export const postComment = (campsiteId, rating, author, text) => dispatch =>{
             const error = new Error(`Error ${response.statue}: ${response.statusText}`);
             error.response = response;
             throw error;
-        }
+            }
         },
         error => { throw error; }
     )
