@@ -181,37 +181,28 @@ export const addPartners = partners => ({
     payload: partners
 });
 
-export const postFeedback = (firstName, lastName, phoneNum, text) => dispatch => { 
-    const newComment = {
-        campsiteId: campsiteId,
-        rating: rating,
-        author: author,
-        text: text
-    };
-    newComment.date = new Date().toISOString();
-
-    return fetch(baseUrl + 'comments', {
+export const postFeedback = feedback => () => {
+    return fetch(baseUrl + 'feedback', {
         method: "POST",
-        body: JSON.stringify(newComment),
+        body: JSON.stringify(feedback),
         headers: {
             "Content-Type": "application/json"
         }
     })
     .then(response => {
-        if (response.ok) {
+        if(response.ok) {
             return response;
         } else {
-            const error = new Error(`Error ${response.statue}: ${response.statusText}`);
+            const error = new Error(`Error ${response.status}: ${response.statusText}`);
             error.response = response;
             throw error;
-            }
-        },
-        error => { throw error; }
-    )
+        }
+    },
+        error => { throw error; })
     .then(response => response.json())
-    .then(response => dispatch(addComment(response)))
+    .then(response => { alert('Thank you for your feedback!\n' + JSON.stringify(response)) })
     .catch(error => {
-        console.log('post comment', error.message);
-        alert('Your comment could not be posted \nError: ' + error.message);
+        console.log('post-feedback', error.message);
+        alert('Your feedback could not be posted\nError: ' + error.message);
     })
 };
