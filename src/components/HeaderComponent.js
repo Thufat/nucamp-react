@@ -28,7 +28,6 @@ class Header extends Component {
     this.setState({
       isModalOpen: !this.state.isModalOpen
     });
-    console.log("toggleModal has been fired.")
   }
 
   handleLogin(event) {
